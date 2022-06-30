@@ -1,14 +1,17 @@
 package com.arafat.whiteboard.repository;
 
-import com.arafat.whiteboard.model.Students;
-import com.arafat.whiteboard.model.Tutorial;
+import com.arafat.whiteboard.model.SchoolStudents;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface StudentRepo extends JpaRepository<Students, Long> {
+public interface StudentRepo extends JpaRepository<SchoolStudents, Long> {
 
-    List<Students> findByRoll(int roll);
-    List<Students> findByLevelEqualsAndTermEquals(int level, int term);
-    List<Students> findBySession(String session);
+    List<SchoolStudents> findByGradeAndRoll(String grade,int roll);
+    List<SchoolStudents> findBySession(String session);
+    List<SchoolStudents> findByGradeAndShift(String grade, String shift);
+    List<SchoolStudents> findByGrade(String grade);
+
+    SchoolStudents findByRollAndGrade(int roll, String grade);
+
 }
