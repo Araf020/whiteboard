@@ -2,21 +2,21 @@
 WhiteBoard is a Learning management system
 
 Features: 
-    Declare assignments
+   1. Declare assignments
    
-   Accept Submission
+   2. Accept Submission
    
-   Share Resources
+   3. Share Resources
    
-   Communication among teacher-students
+   4. Communication among teacher-students
   
-   Keep Track of every students doing their given tasks
+   5. Keep Track of every students doing their given tasks
    
-   Keep track of grade given on tasks
+   6. Keep track of grade given on tasks
   
-   Discussion thread on defined topics
+   7. Discussion thread on defined topics
     
-   Offer Courses
+   8. Offer Courses
     
    And Many more
   
