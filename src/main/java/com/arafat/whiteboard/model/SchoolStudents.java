@@ -2,6 +2,9 @@ package com.arafat.whiteboard.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "school_students")
@@ -25,6 +28,9 @@ public class SchoolStudents {
 
     @Column(name = "email", unique = true)
     private String email;
+    @Column(name = "password")
+    private String password;
+
     @Column(name = "phone")
     private String phone;
 
@@ -62,6 +68,24 @@ public class SchoolStudents {
 
     @Column(name = "is_regular")
     private boolean is_regular;
+
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    private List<Submission> submissionList;
+
+//    establish A many to many relationship with the course class
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "course_student", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
+    private List<Course> courseList;
+
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    @JoinTable(name = "tutorial_tags",
+            joinColumns = { @JoinColumn(name = "student_id") },
+            inverseJoinColumns = { @JoinColumn(name = "course_id") })
+    private Set<Course> courses = new HashSet<>();
 
 
 
@@ -140,9 +164,6 @@ public class SchoolStudents {
         this.photo_url = photo_url;
         return this;
     }
-
-
-
 
 
 
@@ -227,4 +248,15 @@ public class SchoolStudents {
         this.section = section;
         return this;
     }
+
+    public String getPassword() {
+        return password;
+    }
+    public SchoolStudents setPassword(String password){
+        this.password = password;
+        return this;
+    }
+
+
+
 }

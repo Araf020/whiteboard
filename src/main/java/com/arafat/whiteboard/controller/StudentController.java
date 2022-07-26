@@ -22,9 +22,8 @@ public class StudentController {
 
     @GetMapping("/students")
     public ResponseEntity<List<SchoolStudents>> getAllStudents() {
-        List<SchoolStudents> students = new ArrayList<>();
 
-        studentRepo.findAll().forEach(students::add);
+        List<SchoolStudents> students = new ArrayList<>(studentRepo.findAll());
 
 
         if (students.isEmpty())

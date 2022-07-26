@@ -1,6 +1,11 @@
 package com.arafat.whiteboard.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "course")
@@ -37,6 +42,17 @@ public class Course {
     private String courseGrade;
     @Column (name = "course_prerequisite")
     private String coursePrerequisite;
+
+//    establish a many to many relationship with the student class
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },
+            mappedBy = "courses")
+    @JsonIgnore
+    private Set<SchoolStudents> students = new HashSet<>();
+
 
     public Course(){}
 
