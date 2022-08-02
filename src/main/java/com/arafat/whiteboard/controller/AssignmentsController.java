@@ -22,7 +22,7 @@ public class AssignmentsController {
     @GetMapping("/assignments/{course_id}")
     public ResponseEntity<List<Assignments>> getAllAssignmentsByCourseId(@PathVariable("course_id") Long course_id) {
 
-        List<Assignments> assignments = new ArrayList<>(assignmentRepo.findByCourse_id(course_id));
+        List<Assignments> assignments = new ArrayList<>(assignmentRepo.findByCourseCourseId(course_id));
 
         if (assignments.isEmpty())
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

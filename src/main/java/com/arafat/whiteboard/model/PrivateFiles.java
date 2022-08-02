@@ -10,7 +10,7 @@ public class PrivateFiles {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long file_id;
+    private long fileId;
 
     @Column(name = "file_type")
     private String fileType;
@@ -26,13 +26,14 @@ public class PrivateFiles {
         this.file_url = file_url;
         this.uploadTime = uploadTime;
     }
+    public  PrivateFiles(){}
 
-    public long getFile_id() {
-        return file_id;
+    public long getfileId() {
+        return fileId;
     }
 
-    public PrivateFiles setFile_id(long file_id) {
-        this.file_id = file_id;
+    public PrivateFiles setfileId(long fileId) {
+        this.fileId = fileId;
         return this;
     }
 

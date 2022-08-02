@@ -11,7 +11,7 @@ public interface AssignmentRepo extends JpaRepository<Assignments, Long> {
     //find the submissions of a assignment
 
     Assignments findByAssTitle(String title);
-    List<Assignments> findByCourse_id(Long course_id);
+    List<Assignments> findByCourseCourseId(Long course_id);
 
 
 

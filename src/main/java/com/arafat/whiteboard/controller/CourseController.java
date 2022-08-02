@@ -72,9 +72,9 @@ public class CourseController {
     //get by id
     @GetMapping("/courses_byId/{id}")
     public ResponseEntity<Course> getCourseById(@PathVariable("id") Long id) {
-        Optional<Course> coursedata = courseRepo.findById(id);
+        Optional<Course> courseData = courseRepo.findById(id);
 
-        return coursedata.map(student -> new ResponseEntity<>(student, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        return courseData.map(student -> new ResponseEntity<>(student, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
     }
 

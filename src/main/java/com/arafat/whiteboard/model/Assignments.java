@@ -16,10 +16,10 @@ public class Assignments {
 //    increment by 1
 //    initial value of 100000
     @Id
-    @SequenceGenerator(name = "assignment_id_seq", sequenceName = "assignment_id_seq", allocationSize = 1, initialValue = 100000)
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "assignment_id_seq")
+    @SequenceGenerator(name = "assignmentId_seq", sequenceName = "assignmentId_seq", allocationSize = 1, initialValue = 100000)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "assignmentId_seq")
 
-    private long assignment_id;
+    private long assignmentId;
 
     @Column(name = "ass_title")
     private String assTitle;
@@ -39,7 +39,7 @@ public class Assignments {
 
 //    establish a many to one relationship with the course  class
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "course_id", nullable = false)
+    @JoinColumn(name = "courseId", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Course course;
 
@@ -54,12 +54,12 @@ public class Assignments {
         this.description = description;
     }
 
-    public long getAssignment_id() {
-        return assignment_id;
+    public long getassignmentId() {
+        return assignmentId;
     }
 
-    public Assignments setAssignment_id(long assignment_id) {
-        this.assignment_id = assignment_id;
+    public Assignments setassignmentId(long assignmentId) {
+        this.assignmentId = assignmentId;
         return this;
     }
 

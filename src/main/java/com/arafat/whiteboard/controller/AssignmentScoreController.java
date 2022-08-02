@@ -22,7 +22,7 @@ public class AssignmentScoreController {
     public ResponseEntity<List<AssignmentScore>> getAllCourses(@PathVariable("student_id") Long student_id) {
         List<AssignmentScore> assignmentScores = new ArrayList<>();
 
-        assignmentScores = assignmentScoreRepo.findBySchoolStudent_id(student_id);
+        assignmentScores = assignmentScoreRepo.findBySchoolStudentStudentId(student_id);
 
         if (assignmentScores.isEmpty())
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

@@ -11,20 +11,20 @@ import java.util.Date;
 @Table(name = "submission")
 public class Submission {
     @Id
-    @SequenceGenerator(name = "submission_id_seq", sequenceName = "submission_id_seq", allocationSize = 1, initialValue = 100000)
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "submission_id_seq")
-    private long submission_id;
+    @SequenceGenerator(name = "submissionId_seq", sequenceName = "submissionId_seq", allocationSize = 1, initialValue = 100000)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "submissionId_seq")
+    private long submissionId;
 
     //establishing the relationship between submission and student
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "student_id", nullable = false)
+    @JoinColumn(name = "studentId", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private SchoolStudents student;
 
     //establishing the relationship between submission and student
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "assignment_id", nullable = false)
+    @JoinColumn(name = "assignmentId", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Assignments assignment;
@@ -48,12 +48,12 @@ public class Submission {
     public Submission() {
     }
 
-    public long getSubmission_id() {
-        return submission_id;
+    public long getsubmissionId() {
+        return submissionId;
     }
 
-    public Submission setSubmission_id(long submission_id) {
-        this.submission_id = submission_id;
+    public Submission setsubmissionId(long submissionId) {
+        this.submissionId = submissionId;
         return this;
     }
 

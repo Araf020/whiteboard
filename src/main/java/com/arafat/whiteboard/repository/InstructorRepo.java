@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface InstructorRepo extends JpaRepository<Instructor, Long> {
 
-    List<Instructor> findInstructorByDesignation(String designation);
+    List<Instructor> findByDesignation(String designation);
+
+
 }

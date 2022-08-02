@@ -8,8 +8,10 @@ import java.util.List;
 
 public interface AssignmentScoreRepo extends JpaRepository<AssignmentScore, Long> {
 //    find scores by assignmentId
-    List<AssignmentScore> findByAssignment_id(Long assignment_id);
-    List<AssignmentScore> findBySchoolStudent_id(Long student_id);
+    List<AssignmentScore> findByAssignmentAssignmentId(Long assignmentId);
+//    List<AssignmentScore> findBySchoolStudent_id(Long student_id);
+//    find by schoolStudent_id and
+    List<AssignmentScore> findBySchoolStudentStudentId(Long studentId);
 
 
 }

@@ -22,7 +22,7 @@ public class AssignmentScore {
 
 //    establish one-to-many relationship with Assignment
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "assignment_id", nullable = false)
+    @JoinColumn(name = "assignmentId", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Assignments assignment;
@@ -30,7 +30,7 @@ public class AssignmentScore {
 //    establish one to many relation ship with student
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "student_id", nullable = false)
+    @JoinColumn(name = "studentId", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private SchoolStudents schoolStudent;

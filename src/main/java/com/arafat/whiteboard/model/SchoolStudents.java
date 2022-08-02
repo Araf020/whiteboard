@@ -12,7 +12,7 @@ public class SchoolStudents {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long student_id;
+    private long studentId;
 
     @Column(name = "roll", unique = true)
     private int roll;
@@ -74,7 +74,10 @@ public class SchoolStudents {
 
 //    establish A many to many relationship with the course class
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "course_student", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
+    @JoinTable(name = "course_student",
+            joinColumns = @JoinColumn(name = "studentId"),
+            inverseJoinColumns = @JoinColumn(name = "courseId")
+    )
     private List<Course> courseList;
 
     @ManyToMany(fetch = FetchType.LAZY,
@@ -83,8 +86,8 @@ public class SchoolStudents {
                     CascadeType.MERGE
             })
     @JoinTable(name = "tutorial_tags",
-            joinColumns = { @JoinColumn(name = "student_id") },
-            inverseJoinColumns = { @JoinColumn(name = "course_id") })
+            joinColumns = { @JoinColumn(name = "studentId") },
+            inverseJoinColumns = { @JoinColumn(name = "courseId") })
     private Set<Course> courses = new HashSet<>();
 
 
@@ -108,7 +111,7 @@ public class SchoolStudents {
 
 
     public long get_id() {
-        return student_id;
+        return studentId;
     }
 
     public int getRoll() {

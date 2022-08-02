@@ -18,10 +18,10 @@ public class Course {
     //set increment by 1
     //set initial value of 101
     @Id
-    @SequenceGenerator(name = "course_id_seq", sequenceName = "course_id_seq", allocationSize = 1, initialValue = 101)
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "course_id_seq")
+    @SequenceGenerator(name = "courseId_seq", sequenceName = "courseId_seq", allocationSize = 1, initialValue = 300000)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "courseId_seq")
 
-    private long course_id;
+    private long courseId;
 
     @Column(name = "course_code",unique = true)
     private String courseCode;
@@ -53,6 +53,16 @@ public class Course {
     @JsonIgnore
     private Set<SchoolStudents> students = new HashSet<>();
 
+//    establish a many to many relationship with the instructor class
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },
+            mappedBy = "courses")
+    @JsonIgnore
+    private Set<Instructor> instructors = new HashSet<>();
+
 
     public Course(){}
 
@@ -62,13 +72,13 @@ public class Course {
         this.creditHour = creditHour;
     }
 
-    public long getCourse_id() {
-        return course_id;
+    public long getcourseId() {
+        return courseId;
     }
 
 
 
-    public String getCourseId() {
+    public String getCourseCode() {
         return courseCode;
     }
 
@@ -132,5 +142,8 @@ public class Course {
         this.coursePrerequisite = coursePrerequisite;
         return this;
     }
+
+
+
 }
 

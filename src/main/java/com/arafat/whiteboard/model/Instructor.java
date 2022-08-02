@@ -2,20 +2,30 @@ package com.arafat.whiteboard.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "instructor")
 
 public class Instructor {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long instructor_id;
+    @SequenceGenerator(name = "instructorId_seq", sequenceName = "instructorId_seq", allocationSize = 1, initialValue = 600000)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "instructorId_seq")
+
+    private long instructorId;
 
     @Column(name = "name")
     private String name;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
+
+
+    @Column (name = "password")
+    private String password;
+    @Column (name = "phone")
+    private String phone;
 
     @Column(name = "dob")
     private Date dateOfBirth;
@@ -29,30 +39,40 @@ public class Instructor {
     @Column(name = "designation")
     private String designation;
 
-    @Column(name = "salary")
-    private double salary;
+//    speciality
+    @Column(name = "speciality")
+    private String speciality;
 
     @Column(name = "ofice_number")
-    private int ofice_number;
+    private int office_number;
+
+//    establish relationship with course  table
+//    many to many
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "instructor_course",
+            joinColumns = @JoinColumn(name = "instructorId"),
+            inverseJoinColumns = @JoinColumn(name = "courseId"))
+    private Set<Course> courses = new HashSet<>();
+
+
+
 
     public Instructor(){}
 
-    public Instructor(String name, String email, Date dateOfBirth, String address, String photo_url, String designation, double salary, int ofice_number) {
+    public Instructor(long instructorId, String name, String email, String password, String phone, Date dateOfBirth, String address, String photo_url, String designation, String speciality, int office_number, Set<Course> courses) {
+        this.instructorId = instructorId;
         this.name = name;
         this.email = email;
+        this.password = password;
+        this.phone = phone;
         this.dateOfBirth = dateOfBirth;
         this.address = address;
         this.photo_url = photo_url;
         this.designation = designation;
-        this.salary = salary;
-        this.ofice_number = ofice_number;
+        this.speciality = speciality;
+        this.office_number = office_number;
+        this.courses = courses;
     }
-
-    public long getInstructor_id() {
-        return instructor_id;
-    }
-
-
 
     public String getName() {
         return name;
@@ -108,21 +128,59 @@ public class Instructor {
         return this;
     }
 
-    public double getSalary() {
-        return salary;
+
+
+    public int getOffice_number() {
+        return office_number;
     }
 
-    public Instructor setSalary(double salary) {
-        this.salary = salary;
+    public Instructor setOffice_number(int office_number) {
+        this.office_number = office_number;
         return this;
     }
 
-    public int getOfice_number() {
-        return ofice_number;
+    public long getInstructorId() {
+        return instructorId;
     }
 
-    public Instructor setOfice_number(int ofice_number) {
-        this.ofice_number = ofice_number;
+    public Instructor setInstructorId(long instructorId) {
+        this.instructorId = instructorId;
+        return this;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Instructor setPassword(String password) {
+        this.password = password;
+        return this;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public Instructor setPhone(String phone) {
+        this.phone = phone;
+        return this;
+    }
+
+    public String getSpeciality() {
+        return speciality;
+    }
+
+    public Instructor setSpeciality(String speciality) {
+        this.speciality = speciality;
+        return this;
+    }
+
+    public Set<Course> getCourses() {
+        return courses;
+    }
+
+    public Instructor setCourses(Set<Course> courses) {
+        this.courses = courses;
         return this;
     }
 }

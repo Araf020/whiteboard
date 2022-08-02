@@ -8,7 +8,7 @@ import java.util.Date;
 public class Forum {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long forum_id;
+    private long forumId;
 
     @Column(name = "forum_title")
     private String forum_title;
@@ -29,12 +29,12 @@ public class Forum {
 
     public  Forum(){}
 
-    public long getForum_id() {
-        return forum_id;
+    public long getforumId() {
+        return forumId;
     }
 
-    public Forum setForum_id(long forum_id) {
-        this.forum_id = forum_id;
+    public Forum setforumId(long forumId) {
+        this.forumId = forumId;
         return this;
     }
 

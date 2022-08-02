@@ -8,7 +8,7 @@ import java.util.Date;
 public class CourseMaterials {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long material_id;
+    private long materialId;
 
     @Column(name = "file_type")
     private String fileType;
@@ -29,12 +29,12 @@ public class CourseMaterials {
         this.create_time = create_time;
     }
 
-    public long getMaterial_id() {
-        return material_id;
+    public long getmaterialId() {
+        return materialId;
     }
 
-    public CourseMaterials setMaterial_id(long material_id) {
-        this.material_id = material_id;
+    public CourseMaterials setmaterialId(long materialId) {
+        this.materialId = materialId;
         return this;
     }
 
