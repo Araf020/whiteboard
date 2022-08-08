@@ -1,17 +1,27 @@
 package com.arafat.whiteboard.model;
 
-import net.minidev.json.annotate.JsonIgnore;
+// import net.minidev.json.annotate.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+// import org.springframework.boot.jackson.JsonComponent;
+
+import java.util.Date;
+
+// // import com.arafat.whiteboard.serializer.PostDeserializer;
+// import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import javax.persistence.*;
-import java.util.Date;
+
 
 @Entity
 @Table(name = "post")
+// @JsonDeserialize(using = PostDeserializer.class)
+
+// @JsonComponent(value = "post")
+
 public class Post {
     @Id
-    @SequenceGenerator(name = "postId_seq", sequenceName = "postId_seq", allocationSize = 1, initialValue = 600000)
+    @SequenceGenerator(name = "postId_seq", sequenceName = "postId_seq", allocationSize = 1, initialValue = 700000)
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "postId_seq")
 
     private long postId;
@@ -22,15 +32,19 @@ public class Post {
     @Column(name = "post_title")
     private String postTitle;
 
-
     @Column(name = "timestamp")
     private Date createdAt;
+
+    @Column(name = "post_file_path")
+    private String postFileName;
+    @Column(name = "post_file_type")
+    private String postFileType;
 
 // Many to one relationship with instructor
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "instructorId", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
+    // @JsonIgnore
     private Instructor instructor;
 
 
@@ -38,7 +52,7 @@ public class Post {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "courseId", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
+    // @JsonIgnore
     private Course course;
 
 
@@ -59,7 +73,7 @@ public class Post {
     }
 
     public Post setPostText(String postText) {
-        this.postText = Post.this.postText;
+        this.postText = postText;
         return this;
     }
 
@@ -106,4 +120,22 @@ public class Post {
         return this;
     }
 
+    public String getPostFileName() {
+        return postFileName;
+    }
+
+    public Post setPostFileName(String postFileName) {
+        this.postFileName = postFileName;
+        return this;
+    }
+
+    public String getPostFileType() {
+        return postFileType;
+    }
+
+    public Post setPostFileType(String postFileType) {
+        this.postFileType = postFileType;
+        return this;
+    }
+    
 }

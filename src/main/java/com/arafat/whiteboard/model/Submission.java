@@ -1,6 +1,5 @@
 package com.arafat.whiteboard.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -19,14 +18,14 @@ public class Submission {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "studentId", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
+    // @JsonIgnore
     private SchoolStudents student;
 
     //establishing the relationship between submission and student
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "assignmentId", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
+    // @JsonIgnore
     private Assignments assignment;
 
 

@@ -50,7 +50,7 @@ public class Course {
                     CascadeType.MERGE
             },
             mappedBy = "courses")
-    @JsonIgnore
+    // @JsonIgnore
     private Set<SchoolStudents> students = new HashSet<>();
 
 //    establish a many to many relationship with the instructor class
@@ -82,8 +82,12 @@ public class Course {
         return courseCode;
     }
 
-    public Course setCourseId(String courseCode) {
-        this.courseCode = Course.this.courseCode;
+    public Course setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
+        return this;
+    }
+    public Course setCourseId(Long id) {
+        this.courseId = id;
         return this;
     }
 

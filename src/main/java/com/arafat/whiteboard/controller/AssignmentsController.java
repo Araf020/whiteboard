@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +20,8 @@ public class AssignmentsController {
     @Autowired
     private AssignmentRepo assignmentRepo;
 
+
+    // tested: works
     @GetMapping("/assignments/{course_id}")
     public ResponseEntity<List<Assignments>> getAllAssignmentsByCourseId(@PathVariable("course_id") Long course_id) {
 
@@ -44,31 +47,59 @@ public class AssignmentsController {
 //    }
 
 //    create an assignment
-    @PostMapping("/assignments")
+// tested: works
+    @PostMapping("/create_assignment")
     public ResponseEntity<Assignments> createAssignment(@RequestBody Assignments assignment) {
-        assignmentRepo.save(assignment);
+        try{
+            assignmentRepo.save(assignment);
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>(assignment, HttpStatus.CREATED);
     }
 
 //    update an assignment
-//    @PutMapping("/assignments/{id}")
-//    public ResponseEntity<Assignments> updateAssignment(@PathVariable("id") Long id, @RequestBody Assignments assignment) {
-//        Optional<Assignments> assignmentData = assignmentRepo.findById(id);
-//        if (assignmentData.isEmpty()) {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//        Assignments assignment_2 = assignmentData.get();
-//
-//        assignment_2.setSpec(assignment.getSpec());
-//
-////        put to db
-//        assignmentRepo.save(assignment_2);
-//
-//        return new ResponseEntity<>(assignment_2, HttpStatus.OK);
-//
-//
-//
-//
-//    }
+   @PutMapping("/assignments/{id}")
+   public ResponseEntity<Assignments> updateAssignment(@PathVariable("id") Long id, @RequestBody Assignments assignment) {
+       Optional<Assignments> assignmentData = assignmentRepo.findById(id);
+       if (assignmentData.isEmpty()) {
+           return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+       }
+       Assignments assignment_2 = assignmentData.get();
+
+       Date dueDate = assignment.getAssignmentDueDate();
+       String title = assignment.getAssTitle();
+         String description = assignment.getDescription();
+            String spec = assignment.getSpec();
+            
+         if (dueDate != null) {
+              assignment_2.setAssignmentDueDate(dueDate);
+         }
+            if (title != null) {
+                assignment_2.setAssTitle(title);
+            }
+            if (description != null) {
+                assignment_2.setDescription(description);
+            }
+            if (spec != null) {
+                assignment_2.setSpec(spec);
+            }
+            
+
+
+            
+       
+//        put to db
+       try{
+           assignmentRepo.save(assignment_2);
+       }
+       catch (Exception e){
+           return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+       }
+
+       return new ResponseEntity<>(assignment_2, HttpStatus.OK);
+
+   }
 
 }

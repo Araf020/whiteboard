@@ -1,7 +1,6 @@
 package com.arafat.whiteboard.controller;
 
-import com.arafat.whiteboard.model.Course;
-import com.arafat.whiteboard.model.Instructor;
+
 import com.arafat.whiteboard.model.Post;
 import com.arafat.whiteboard.repository.CourseRepo;
 import com.arafat.whiteboard.repository.InstructorRepo;
@@ -18,14 +17,13 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api")
+
+
 public class PostController {
     @Autowired
     private PostRepo postRepo;
-    @Autowired
-    private CourseRepo courseRepo;
-    @Autowired
-    private InstructorRepo instructorRepo;
 
+    // tested: works
     @GetMapping("/posts")
     public ResponseEntity<List<Post>> getAllPosts() {
 
@@ -59,38 +57,16 @@ public class PostController {
     }
 
 //    insert a post
+// tested: working
     @PostMapping("/create_post")
     public ResponseEntity<Post> createPost(@RequestBody Post post) {
 
-        Long InstructorId = post.getInstructor().getInstructorId();
-        Long CourseId = post.getCourse().getcourseId();
-//        log info
-
-        System.out.println(InstructorId);
-        System.out.println(CourseId);
-
-
 //       handle error
         try {
-
-
-            Optional<Instructor> inst = instructorRepo.findById(InstructorId);
-            Instructor instructor = null;
-            if (inst.isPresent()) {
-                instructor = inst.get();
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-            Optional<Course> course = courseRepo.findById(CourseId);
-            Course course1 = null;
-            if (course.isPresent()) {
-                course1 = course.get();
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-
             postRepo.save(post);
+
         } catch (Exception e) {
+            System.out.println("Error creating post: " + e.toString());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(post, HttpStatus.CREATED);
@@ -116,7 +92,8 @@ public class PostController {
         return new ResponseEntity<>(post_2, HttpStatus.OK);
         }
 
-//    delete a post
+//    delete a post 
+// tested: works
     @DeleteMapping("/delete_post/{post_id}")
     public ResponseEntity<Post> deletePost(@PathVariable("post_id") Long post_id) {
         Optional<Post> postData = postRepo.findById(post_id);
@@ -133,12 +110,5 @@ public class PostController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-
-
-
-
-
-
 
 }

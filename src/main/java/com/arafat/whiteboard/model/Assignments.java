@@ -4,6 +4,8 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -24,18 +26,13 @@ public class Assignments {
     @Column(name = "ass_title")
     private String assTitle;
 
-    @Column(name = "submission_link")
-    private String submission_link;
-
-    @Column(name = "spec")
-    private String spec;
+    @Column(name = "spec_file_link")
+    private String specFileLink;
+    @Column(name = "ass_due_date")
+    private Date assignmentDueDate;
 
     @Column(name = "description")
     private String description;
-
-
-    @OneToMany(mappedBy = "assignment", cascade = CascadeType.ALL)
-    private List<Submission> submissions;
 
 //    establish a many to one relationship with the course  class
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -47,10 +44,9 @@ public class Assignments {
     public Assignments() {
     }
 
-    public Assignments(String assTitle, String submission_link, String spec, String description) {
+    public Assignments(String assTitle, String spec, String description) {
         this.assTitle = assTitle;
-        this.submission_link = submission_link;
-        this.spec = spec;
+        this.specFileLink = spec;
         this.description = description;
     }
 
@@ -63,30 +59,23 @@ public class Assignments {
         return this;
     }
 
-    public String getAss_title() {
+    public String getAssTitle() {
         return assTitle;
     }
 
-    public Assignments setAss_title(String assTitle) {
+    public Assignments setAssTitle(String assTitle) {
         this.assTitle = assTitle;
         return this;
     }
 
-    public String getSubmission_link() {
-        return submission_link;
-    }
-
-    public Assignments setSubmission_link(String submission_link) {
-        this.submission_link = submission_link;
-        return this;
-    }
+    
 
     public String getSpec() {
-        return spec;
+        return specFileLink;
     }
 
     public Assignments setSpec(String spec) {
-        this.spec = spec;
+        this.specFileLink = spec;
         return this;
     }
 
@@ -98,10 +87,28 @@ public class Assignments {
         this.description = description;
         return this;
     }
-//    get courses
+
+    // get due date
+    public Date getAssignmentDueDate() {
+        return assignmentDueDate;
+    }
+
+    // set due date
+    public Assignments setAssignmentDueDate(Date assignmentDueDate) {
+        this.assignmentDueDate = assignmentDueDate;
+        return this;
+    }
+
+    // set course
+    public Assignments setCourse(Course course) {
+        this.course = course;
+        return this;
+    }
+
     public Course getCourse() {
         return course;
     }
+    
 
 
 }

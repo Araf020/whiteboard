@@ -1,7 +1,6 @@
 package com.arafat.whiteboard.controller;
 
 import com.arafat.whiteboard.model.Course;
-import com.arafat.whiteboard.model.SchoolStudents;
 import com.arafat.whiteboard.repository.CourseRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api")
 public class CourseController {
